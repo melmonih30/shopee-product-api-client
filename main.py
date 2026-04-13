@@ -32,11 +32,18 @@ while True:
 
     code = result["code"]
 
-    if code == 0:
-        print("✅ Data ready!")
-        product_data = result["data"]["source"]
-        print(product_data)
-        break
+    import json
+
+if code == 0:
+    print("✅ Data ready!")
+    product_data = result["data"]["source"]
+
+    # Save data to JSON file
+    with open("product_data.json", "w", encoding="utf-8") as f:
+        json.dump(product_data, f, indent=4)
+
+    print("📁 Data saved to product_data.json")
+    break
 
     elif code == -1:
         print("⏳ Still processing...")
