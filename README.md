@@ -1,43 +1,52 @@
 # Shopee Product Detail API Client
- Contact: melmonih@bodapi.com
 
-This project demonstrates how to retrieve Shopee product data using an asynchronous API workflow.
+This project is a Python-based API client that retrieves product data from a Shopee-like system using an asynchronous API workflow.
 
-## Overview
+It demonstrates how to connect to APIs, process structured data, and store results for automation or analysis.
 
-The Shopee Product Detail Task API works in three steps:
-
-1. Submit a product detail request
-2. Poll the API until processing is complete
-3. Retrieve the raw product data
-
-## Features
-
-- Submit product detail tasks
-- Poll task status automatically
-- Retrieve raw Shopee product data
-- Clean and simple Python implementation
-
-## Tech Stack
-
-- Python
-- Requests library
-- REST API
-
-## How to Use
-
-1. Add your API credentials:
-
-```python
-TOKEN = "YOUR_API_TOKEN"
-SECRET = "YOUR_API_SECRET"
 ---
 
-## Contact
+## 🔍 Project Overview
 
-If you need help with Shopee product data extraction, API integration, or automation, feel free to reach out:
+This project simulates:
 
-- Email: melmonih@bodapi.com
+- Product data retrieval via API  
+- Structured JSON response handling  
+- Automation-ready data processing  
 
+---
 
-I’m open to collaborations and projects.
+## ⚙️ How It Works
+
+1. Sends a request to the product API  
+2. Retrieves product data in JSON format  
+3. Processes and structures the response  
+4. Saves the data into a local JSON file  
+
+---
+
+## 📂 Project Structure
+
+- `main.py` – Handles API request and data processing  
+- `requirements.txt` – Project dependencies  
+- `README.md` – Documentation  
+
+---
+
+## 🚀 How to Run
+
+1. Clone the repository  
+2. Install dependencies:
+
+3. Run the script:
+
+---
+
+## 📄 Sample Output
+
+```json
+{
+  "product_name": "Sample Item",
+  "price": 100,
+  "stock": 50
+}
