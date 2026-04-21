@@ -1,5 +1,13 @@
+# Shopee Product Data API Client
+# This script:
+# 1. Sends a request to the API
+# 2. Retrieves product data asynchronously
+# 3. Polls until data is ready
+# 4. Saves the result into a JSON file
+
 import requests
 import time
+import json
 
 BASE_URL = "https://api.bodapi.com"
 TOKEN = "YOUR_API_TOKEN"
@@ -18,10 +26,16 @@ params = {
 
 # Step 1: Submit task
 submit_url = f"{BASE_URL}/sp/v1/submit/product_detail"
-response = requests.get(submit_url, headers=headers, params=params).json()
+try:
+    response = requests.get(submit_url, headers=headers, params=params)
+    response.raise_for_status()
+    response = response.json()
+except Exception as e:
+    print(f"[ERROR] Failed to submit request: {e}")
+    exit()
 
 batch_id = response["data"]["batch_id"]
-print("Batch ID:", batch_id)
+print(f"[INFO] Batch ID received: {batch_id}")
 
 # Step 2: Poll for result
 query_url = f"{BASE_URL}/sp/v1/query/product_detail"
@@ -32,25 +46,23 @@ while True:
 
     code = result["code"]
 
-    import json
-
 if code == 0:
-    print("✅ Data ready!")
+print("[SUCCESS] Data retrieved successfully")
     product_data = result["data"]["source"]
 
     # Save data to JSON file
-    with open("product_data.json", "w", encoding="utf-8") as f:
+    with open("shopee_product_data.json", "w", encoding="utf-8") as f:
         json.dump(product_data, f, indent=4)
 
-    print("📁 Data saved to product_data.json")
+print("📁 Data saved to shopee_product_data.json")
     break
 
     elif code == -1:
-        print("⏳ Still processing...")
+       print("[INFO] Waiting for API to finish processing...")
         time.sleep(3)
 
     else:
-        print("❌ Error:", result["msg"])
+        print(f"[ERROR] {result.get('msg', 'Unknown error')}")
         break
 
   Add main script
